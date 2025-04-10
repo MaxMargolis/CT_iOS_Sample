@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var loggedInUser: String? = nil
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Logged in User: \(loggedInUser ?? "No user logged in")")
+            Spacer()
+            Button("Log in Max Margolis") {
+                print("Max Margolis has been logged in")
+                loggedInUser = "Max Margolis"
+            }
+            Spacer()
         }
         .padding()
     }
