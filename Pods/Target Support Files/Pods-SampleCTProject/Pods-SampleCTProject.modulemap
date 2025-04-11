@@ -1,0 +1,6 @@
+framework module Pods_SampleCTProject {
+  umbrella header "Pods-SampleCTProject-umbrella.h"
+
+  export *
+  module * { export * }
+}

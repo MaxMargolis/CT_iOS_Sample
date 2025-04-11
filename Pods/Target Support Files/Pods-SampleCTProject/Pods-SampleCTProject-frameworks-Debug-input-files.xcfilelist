@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-SampleCTProject/Pods-SampleCTProject-frameworks.sh
+${BUILT_PRODUCTS_DIR}/CleverTap-iOS-SDK-framework/CleverTapSDK.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage-framework/SDWebImage.framework

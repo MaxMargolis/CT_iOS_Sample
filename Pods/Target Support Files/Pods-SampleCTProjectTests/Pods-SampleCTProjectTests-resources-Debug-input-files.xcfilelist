@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-SampleCTProjectTests/Pods-SampleCTProjectTests-resources.sh
+${PODS_ROOT}/CleverTap-iOS-SDK/CleverTapSDK/AmazonRootCA1.cer
+${PODS_CONFIGURATION_BUILD_DIR}/CleverTap-iOS-SDK-library/CleverTapSDK.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage-library/SDWebImage.bundle
