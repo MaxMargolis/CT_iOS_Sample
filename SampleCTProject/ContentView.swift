@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CleverTapSDK
 
 struct ContentView: View {
     @State private var loggedInUser: String? = nil
@@ -20,6 +21,12 @@ struct ContentView: View {
             Spacer()
         }
         .padding()
+    }
+}
+
+private extension ContentView {
+    func logInMaxMargolis() {
+        
     }
 }
 
