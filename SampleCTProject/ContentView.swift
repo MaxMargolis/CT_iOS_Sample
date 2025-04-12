@@ -27,7 +27,10 @@ struct ContentView: View {
 
 private extension ContentView {
     func logInMaxMargolis() {
-        
+        let maxMargolisProperties = ["Email": "max@clevertap.com",
+                                     "Name": "Max Margolis",
+                                     "Identity": "MaxMargolis"] as [AnyHashable : Any]
+        CleverTap.sharedInstance()?.onUserLogin(maxMargolisProperties)
     }
 }
 
