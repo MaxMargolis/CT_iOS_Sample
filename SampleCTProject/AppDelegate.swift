@@ -19,16 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         setCleverTapCredentials() // make sure to call this before autoIntegrate
         CleverTap.autoIntegrate()
         registerForPush()
-        setCleverTapDebugRaw()
+        setCleverTapLogLevelToDebugRaw()
     }
-    
     
     // Should be called before autoIntegrate
     private func setCleverTapCredentials() {
         CleverTap.setCredentialsWithAccountID(Credentials.projectID, andToken: Credentials.projectToken)
     }
     
-    // Should be called after autoIntegrate
+    /// Should be called after autoIntegrate
     private func registerForPush() {
         
         // Set delegate.
@@ -46,9 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         })
     }
     
-    private func setCleverTapDebugRaw() {
+    /// Sets debug log level to raw
+    private func setCleverTapLogLevelToDebugRaw() {
         //By default, CleverTap logs are set to CleverTapLogLevel.info. During development, we recommend that you set the SDK to DEBUG mode, in order to log warnings or other important messages to the iOS logging system. This can be done by setting the debug level to CleverTapLogLevel.debug. If you want to disable CleverTap logs for production environment, you can set the debug level to CleverTapLogLevel.off.rawValue.
         CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
     }
     
 }
+
+
