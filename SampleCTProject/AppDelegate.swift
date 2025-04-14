@@ -19,8 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         setCleverTapCredentials() // make sure to call this before autoIntegrate
         CleverTap.autoIntegrate()
         registerForPush()
-        //By default, CleverTap logs are set to CleverTapLogLevel.info. During development, we recommend that you set the SDK to DEBUG mode, in order to log warnings or other important messages to the iOS logging system. This can be done by setting the debug level to CleverTapLogLevel.debug. If you want to disable CleverTap logs for production environment, you can set the debug level to CleverTapLogLevel.off.rawValue.
-        CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
+        setCleverTapDebugRaw()
     }
     
     
@@ -45,6 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print("Request for Push Notification permission denied")
             }
         })
+    }
+    
+    private func setCleverTapDebugRaw() {
+        //By default, CleverTap logs are set to CleverTapLogLevel.info. During development, we recommend that you set the SDK to DEBUG mode, in order to log warnings or other important messages to the iOS logging system. This can be done by setting the debug level to CleverTapLogLevel.debug. If you want to disable CleverTap logs for production environment, you can set the debug level to CleverTapLogLevel.off.rawValue.
+        CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
     }
     
 }
