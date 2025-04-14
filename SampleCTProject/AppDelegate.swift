@@ -51,6 +51,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
     }
     
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+            NSLog("%@: failed to register for remote notifications: %@", self.description, error.localizedDescription)
+        }
+        
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+            NSLog("%@: registered for remote notifications: %@", self.description, deviceToken.description)
+    }
+        
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+            
+        NSLog("%@: did receive notification response: %@", self.description, response.notification.request.content.userInfo)
+        completionHandler()
+    }
+        
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            
+        NSLog("%@: will present notification: %@", self.description, notification.request.content.userInfo)
+        CleverTap.sharedInstance()?.recordNotificationViewedEvent(withData: notification.request.content.userInfo)
+        completionHandler([.badge, .sound, .banner, .list])
+    }
+        
+    func application(_ application: UIApplication,
+                        didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        NSLog("%@: did receive remote notification completionhandler: %@", self.description, userInfo)
+        completionHandler(UIBackgroundFetchResult.noData)
+    }
+        
+    func pushNotificationTapped(withCustomExtras customExtras: [AnyHashable : Any]!) {
+        NSLog("pushNotificationTapped: customExtras: ", customExtras)
+    }
+    
 }
 
 
