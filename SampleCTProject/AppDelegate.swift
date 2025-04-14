@@ -7,8 +7,9 @@
 
 import UIKit
 import CleverTapSDK
+import UserNotifications
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         setupCleverTap()
         return true
@@ -17,11 +18,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupCleverTap() {
         setCleverTapCredentials() // make sure to call this before autoIntegrate
         CleverTap.autoIntegrate()
+        registerForPush()
         //By default, CleverTap logs are set to CleverTapLogLevel.info. During development, we recommend that you set the SDK to DEBUG mode, in order to log warnings or other important messages to the iOS logging system. This can be done by setting the debug level to CleverTapLogLevel.debug. If you want to disable CleverTap logs for production environment, you can set the debug level to CleverTapLogLevel.off.rawValue.
         CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
     }
     
+    
+    // Should be called before autoIntegrate
     private func setCleverTapCredentials() {
         CleverTap.setCredentialsWithAccountID(Credentials.projectID, andToken: Credentials.projectToken)
     }
+    
+    // Should be called after autoIntegrate
+    private func registerForPush() {
+        
+        // Set delegate.
+        UNUserNotificationCenter.current().delegate = self
+        
+        // Request Push Notification permission
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .badge, .alert], completionHandler: {granted, error in
+            if granted {
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            } else {
+                print("Request for Push Notification permission denied")
+            }
+        })
+    }
+    
 }
