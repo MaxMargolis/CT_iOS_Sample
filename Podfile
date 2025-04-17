@@ -16,3 +16,8 @@
   target 'SampleCTProjectUITests' do
     # Pods for testing
   end
+
+  target 'RichPushNotificationServiceExtension' do
+    use_frameworks!
+    pod "CTNotificationService"
+  end

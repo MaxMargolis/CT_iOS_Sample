@@ -178,10 +178,12 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/CleverTap-iOS-SDK-framework/CleverTapSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage-framework/SDWebImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CTNotificationService/CTNotificationService.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/CleverTap-iOS-SDK-framework/CleverTapSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage-framework/SDWebImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CTNotificationService/CTNotificationService.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
