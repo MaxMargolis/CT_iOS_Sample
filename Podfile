@@ -21,3 +21,8 @@
     use_frameworks!
     pod "CTNotificationService"
   end
+
+  target 'NotificationContentExtension' do
+    use_frameworks!
+    pod "CTNotificationContent"
+  end
