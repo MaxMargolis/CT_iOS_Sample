@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         setCleverTapCredentials() // make sure to call this before autoIntegrate
         CleverTap.autoIntegrate()
         registerForPush()
+        setNotificationCategories()
         setCleverTapLogLevelToDebugRaw()
     }
     
@@ -49,6 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private func setCleverTapLogLevelToDebugRaw() {
         //By default, CleverTap logs are set to CleverTapLogLevel.info. During development, we recommend that you set the SDK to DEBUG mode, in order to log warnings or other important messages to the iOS logging system. This can be done by setting the debug level to CleverTapLogLevel.debug. If you want to disable CleverTap logs for production environment, you can set the debug level to CleverTapLogLevel.off.rawValue.
         CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
+    }
+    
+    /// Sets categories for notification content extension
+    private func setNotificationCategories() {
+        let action1 = UNNotificationAction(identifier: "action_1", title: "Back", options: [])
+        let action2 = UNNotificationAction(identifier: "action_2", title: "Next", options: [])
+        let action3 = UNNotificationAction(identifier: "action_3", title: "View In App", options: [])
+        let category = UNNotificationCategory(identifier: "CTNotification", actions: [action1, action2, action3], intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([category])
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
