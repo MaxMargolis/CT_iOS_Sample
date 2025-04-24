@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var loggedInUser: String? = nil
     @State private var viewDidLoad = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing:100) {
                 Text("Logged in User: \(loggedInUser ?? "No user logged in")")
                 Button("Log in Max Margolis") {
@@ -22,6 +22,9 @@ struct ContentView: View {
                 }
                 NavigationLink("Go To App Inbox") {
                     CTAppInboxRepresentable()
+                        .navigationTitle("My App Inbox")
+                        .toolbarBackgroundVisibility(.visible, for: .navigationBar)
+                        .toolbarBackground(.purple, for: .navigationBar)
                 }
             }
             .onAppear() {

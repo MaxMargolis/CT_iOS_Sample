@@ -11,6 +11,7 @@ import CleverTapSDK
 struct CTAppInboxRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> CleverTapInboxViewController {
         let style = CleverTapInboxStyleConfig()
+        style.backgroundColor = UIColor.green
         let inboxVC: CleverTapInboxViewController = (CleverTap.sharedInstance()?.newInboxViewController(with: style, andDelegate: context.coordinator))!
         return inboxVC
     }
