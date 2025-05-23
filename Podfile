@@ -20,6 +20,7 @@
   target 'RichPushNotificationServiceExtension' do
     use_frameworks!
     pod "CTNotificationService"
+    pod "CleverTap-iOS-SDK"
   end
 
   target 'NotificationContentExtension' do
