@@ -30,6 +30,7 @@ class NotificationService: CTNotificationServiceExtension {
         let maxMargolisProfile = ["Email": "max@clevertap.com",
                                      "Identity": "MaxMargolis"] as [String : AnyObject]
         CleverTap.setCredentialsWithAccountID(Credentials.projectID, andToken: Credentials.projectToken)
+        CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
         CleverTap.sharedInstance()?.profilePush(maxMargolisProfile) // must call this first
         CleverTap.sharedInstance()?.recordNotificationViewedEvent(withData: request.content.userInfo)
     }
