@@ -6,7 +6,7 @@
 //
 
 import CTNotificationService
-
+import CleverTapSDK
 
 class NotificationService: CTNotificationServiceExtension {
 
@@ -14,6 +14,7 @@ class NotificationService: CTNotificationServiceExtension {
     var bestAttemptContent: UNMutableNotificationContent?
 
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        registerPushImpression(with: request)
         super.didReceive(request, withContentHandler: contentHandler)
     }
     
@@ -24,5 +25,12 @@ class NotificationService: CTNotificationServiceExtension {
             contentHandler(bestAttemptContent)
         }
     }
-
+    
+    func registerPushImpression(with request: UNNotificationRequest) {
+        let maxMargolisProfile = ["Email": "max@clevertap.com",
+                                     "Identity": "MaxMargolis"] as [String : AnyObject]
+        CleverTap.setCredentialsWithAccountID(Credentials.projectID, andToken: Credentials.projectToken)
+        CleverTap.sharedInstance()?.profilePush(maxMargolisProfile) // must call this first
+        CleverTap.sharedInstance()?.recordNotificationViewedEvent(withData: request.content.userInfo)
+    }
 }
