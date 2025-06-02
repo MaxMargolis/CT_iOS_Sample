@@ -1,5 +1,5 @@
 //
-//  Events.swift
+//  EventCreator.swift
 //  SampleCTProject
 //
 //  Created by Max Balsam  Margolis on 5/27/25.
@@ -8,7 +8,7 @@
 import SwiftUI
 import CleverTapSDK
 
-struct Events: View {
+struct EventCreator: View {
     @State private var eventName = ""
     @State private var eventPropertyKeys = [""]
     @State private var eventPropertyValues = [""]
@@ -66,5 +66,5 @@ extension Dictionary {
 }
 
 #Preview {
-    Events()
+    EventCreator()
 }
