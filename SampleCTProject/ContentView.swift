@@ -26,6 +26,9 @@ struct ContentView: View {
                         .toolbarBackgroundVisibility(.visible, for: .navigationBar)
                         .toolbarBackground(.purple, for: .navigationBar)
                 }
+                NavigationLink("Go To Events Creator") {
+                    Events()
+                }
             }
             .onAppear() {
                 if viewDidLoad == false {

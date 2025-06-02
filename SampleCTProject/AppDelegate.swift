@@ -12,6 +12,8 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         setupCleverTap()
+        print("MaxLog: clevertap id is: \(CleverTap.sharedInstance()?.profileGetID() ?? "not set")")
+        print("MaxLog: The IDFV (ID for vendor) is: \(String(describing: UIDevice.current.identifierForVendor))")
         return true
     }
     
