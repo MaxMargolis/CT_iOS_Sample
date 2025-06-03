@@ -8,6 +8,11 @@
 import SwiftUI
 import CleverTapSDK
 
+private enum NavigationDestinations {
+    case appInbox
+    case eventCreator
+}
+
 struct ContentView: View {
     @State private var loggedInUser: String? = nil
     @State private var viewDidLoad = false
@@ -20,15 +25,10 @@ struct ContentView: View {
                     loggedInUser = "Max Margolis"
                     logInMaxMargolis()
                 }
-                NavigationLink("Go To App Inbox") {
-                    CTAppInboxRepresentable()
-                        .navigationTitle("My App Inbox")
-                        .toolbarBackgroundVisibility(.visible, for: .navigationBar)
-                        .toolbarBackground(.purple, for: .navigationBar)
-                }
-                NavigationLink("Go To Event Creator") {
-                    EventCreator()
-                }
+                NavigationLink("Go To App Inbox", value: NavigationDestinations.appInbox)
+
+                NavigationLink("Go To Event Creator", value: NavigationDestinations.eventCreator)
+
             }
             .onAppear() {
                 if viewDidLoad == false {
@@ -38,6 +38,17 @@ struct ContentView: View {
             }
             .onOpenURL { incomingURL in
                 print("MaxLog: App was opened via URL: \(incomingURL)")
+            }
+            .navigationDestination(for: NavigationDestinations.self) { destination in
+                switch destination {
+                case .eventCreator:
+                    EventCreator()
+                case .appInbox:
+                    CTAppInboxRepresentable()
+                        .navigationTitle("My App Inbox")
+                        .toolbarBackgroundVisibility(.visible, for: .navigationBar)
+                        .toolbarBackground(.purple, for: .navigationBar)
+                }
             }
         }
     }
