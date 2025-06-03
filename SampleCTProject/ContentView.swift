@@ -8,16 +8,17 @@
 import SwiftUI
 import CleverTapSDK
 
-private enum NavigationDestinations {
-    case appInbox
-    case eventCreator
+private enum NavigationDestinations: String {
+    case appInbox = "appinbox"
+    case eventCreator = "eventcreator"
 }
 
 struct ContentView: View {
     @State private var loggedInUser: String? = nil
     @State private var viewDidLoad = false
+    @State private var navPath = NavigationPath()
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navPath) {
             VStack(spacing:100) {
                 Text("Logged in User: \(loggedInUser ?? "No user logged in")")
                 Button("Log in Max Margolis") {
@@ -38,6 +39,7 @@ struct ContentView: View {
             }
             .onOpenURL { incomingURL in
                 print("MaxLog: App was opened via URL: \(incomingURL)")
+                handleIncomingURL(incomingURL)
             }
             .navigationDestination(for: NavigationDestinations.self) { destination in
                 switch destination {
@@ -86,8 +88,15 @@ private extension ContentView {
             print("MaxLog: Deep link screen name not found")
             return
         }
-        if screenName == "main" { return }
-        
+        if screenName == "main" {
+            navPath.removeLast(navPath.count)
+            return
+        }
+        guard let destination = NavigationDestinations(rawValue: screenName) else {
+            print("MaxLog: Deep link screen name not available")
+            return
+        }
+        navPath.append(destination)
     }
 }
 
