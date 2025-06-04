@@ -11,6 +11,7 @@ import CleverTapSDK
 private enum NavigationDestinations: String {
     case appInbox = "appinbox"
     case eventCreator = "eventcreator"
+    case qualifiers
 }
 
 struct ContentView: View {
@@ -21,14 +22,18 @@ struct ContentView: View {
         NavigationStack(path: $navPath) {
             VStack(spacing:100) {
                 Text("Logged in User: \(loggedInUser ?? "No user logged in")")
+                
                 Button("Log in Max Margolis") {
                     print("MaxLog: Max Margolis has been logged in")
                     loggedInUser = "Max Margolis"
                     logInMaxMargolis()
                 }
+                
                 NavigationLink("Go To App Inbox", value: NavigationDestinations.appInbox)
 
                 NavigationLink("Go To Event Creator", value: NavigationDestinations.eventCreator)
+                
+                NavigationLink("Go To Qualifiers", value: NavigationDestinations.qualifiers)
 
             }
             .onAppear() {
@@ -50,6 +55,8 @@ struct ContentView: View {
                         .navigationTitle("My App Inbox")
                         .toolbarBackgroundVisibility(.visible, for: .navigationBar)
                         .toolbarBackground(.purple, for: .navigationBar)
+                case .qualifiers:
+                    Qualifiers()
                 }
             }
         }
@@ -60,6 +67,7 @@ private extension ContentView {
     func logInMaxMargolis() {
         let maxMargolisProperties = ["Email": "max@clevertap.com",
                                      "Name": "Max Margolis",
+                                     "Tz": "PST",
                                      "Identity": "MaxMargolis"] as [AnyHashable : Any]
         CleverTap.sharedInstance()?.onUserLogin(maxMargolisProperties)
     }
