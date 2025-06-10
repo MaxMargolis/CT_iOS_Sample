@@ -29,6 +29,12 @@ struct ContentView: View {
                     logInMaxMargolis()
                 }
                 
+                Button("Log in Sophie Germain") {
+                    print("MaxLog: Sophie Germain has been logged in")
+                    loggedInUser = "Sophie Germain"
+                    logInSophieGermain()
+                }
+                
                 NavigationLink("Go To App Inbox", value: NavigationDestinations.appInbox)
 
                 NavigationLink("Go To Event Creator", value: NavigationDestinations.eventCreator)
@@ -64,6 +70,12 @@ struct ContentView: View {
 }
 
 private extension ContentView {
+    func logInSophieGermain() {
+        let sophieGermainProperties = ["Email": "sophie@clevertap.com",
+                                       "Name": "Sophie Germain",
+                                       "Identity": "SophieGermain"] as [AnyHashable : Any]
+        CleverTap.sharedInstance()?.onUserLogin(sophieGermainProperties)
+    }
     func logInMaxMargolis() {
         let maxMargolisProperties = ["Email": "max@clevertap.com",
                                      "Name": "Max Margolis",
