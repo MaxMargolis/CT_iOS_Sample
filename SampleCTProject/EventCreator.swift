@@ -15,9 +15,7 @@ struct EventCreator: View {
     var body: some View {
         VStack(spacing: 10) {
             Button {
-                if !eventName.isEmpty && eventPropertyKeys.count == eventPropertyValues.count {
-                    CleverTap.sharedInstance()?.recordEvent(eventName, withProps: Dictionary(keys: eventPropertyKeys, values: eventPropertyValues))
-                }
+                sendEventButtonPressed()
             } label: {
                 Text("Send Event")
             }
@@ -49,6 +47,32 @@ struct EventCreator: View {
             }
             .padding(20)
             Spacer()
+        }
+    }
+    
+    private func sendEventButtonPressed() {
+        
+//        var dob = DateComponents()
+//        dob.day = 1
+//        dob.month = 4
+//        dob.year = 1976
+//        let d = Calendar.current.date(from: dob)
+//        
+//        let userProperties = ["Gender": "F",
+//                              "DOB": d!,
+//                              "Customer Type": "Grand",
+//                              "Favorite Color": "Chartreuse"] as [String : Any]
+//        
+//        CleverTap.sharedInstance()?.profilePush(userProperties)
+        
+//        let fooEventProperties = ["Product Type": "Bar X",
+//                                  "Price": 19.99,
+//                                  "Category": "Bar and Grill"] as [String : Any]
+//        
+//        CleverTap.sharedInstance()?.recordEvent("Foo", withProps: fooEventProperties)
+        
+        if !eventName.isEmpty && eventPropertyKeys.count == eventPropertyValues.count {
+            CleverTap.sharedInstance()?.recordEvent(eventName, withProps: Dictionary(keys: eventPropertyKeys, values: eventPropertyValues))
         }
     }
 }
