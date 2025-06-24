@@ -27,11 +27,12 @@ class NotificationService: CTNotificationServiceExtension {
     }
     
     func registerPushImpression(with request: UNNotificationRequest) {
-        let maxMargolisProfile = ["Email": "max@clevertap.com",
-                                     "Identity": "MaxMargolis"] as [String : AnyObject]
+        guard let loggedInUserProperties = UserDefaults.group?.value(forKey: UserDefaultsKeys.loggedInUserPropertiesKey) as? [AnyHashable: Any] else {
+            return
+        }
         CleverTap.setCredentialsWithAccountID(Credentials.projectID, andToken: Credentials.projectToken)
         CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
-        CleverTap.sharedInstance()?.profilePush(maxMargolisProfile) // must call this first
+        CleverTap.sharedInstance()?.onUserLogin(loggedInUserProperties) // must call this first
         CleverTap.sharedInstance()?.recordNotificationViewedEvent(withData: request.content.userInfo)
     }
 }

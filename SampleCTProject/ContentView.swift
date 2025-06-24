@@ -75,6 +75,7 @@ private extension ContentView {
                                        "Name": "Sophie Germain",
                                        "Identity": "SophieGermain"] as [AnyHashable : Any]
         CleverTap.sharedInstance()?.onUserLogin(sophieGermainProperties)
+        UserDefaults.group?.set(sophieGermainProperties, forKey: UserDefaultsKeys.loggedInUserPropertiesKey)
     }
     func logInMaxMargolis() {
         let maxMargolisProperties = ["Email": "max@clevertap.com",
@@ -82,6 +83,7 @@ private extension ContentView {
                                      "Tz": "PST",
                                      "Identity": "MaxMargolis"] as [AnyHashable : Any]
         CleverTap.sharedInstance()?.onUserLogin(maxMargolisProperties)
+        UserDefaults.group?.set(maxMargolisProperties, forKey: UserDefaultsKeys.loggedInUserPropertiesKey)
     }
     
     func initializeAppInbox() {
